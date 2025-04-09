@@ -1,0 +1,5 @@
+<map id="CustomCalloutServer::OnRequestHeader" name="CustomCalloutServer::OnRequestHeader">
+<area shape="rect" id="node1" title="Processes incoming request headers for JWT authentication." alt="" coords="5,35,165,76"/>
+<area shape="rect" id="node2" href="$dd/d00/classCalloutServer.html#a51925da2fac5c0e0285b25799fe04e41" title=" " alt="" coords="213,5,409,47"/>
+<area shape="rect" id="node3" href="$da/d7f/jwt__auth_2custom__callout__server_8h.html#ae2e3b0d46551429f1a27edb756e247b0" title="Extracts JWT token from HTTP Authorization header." alt="" coords="242,71,381,98"/>
+</map>
