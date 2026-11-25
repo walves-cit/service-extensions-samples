@@ -35,30 +35,16 @@ func sendErrorResponse(err error) {
 
 // Add foo onto the end of each request body chunk
 func (ctx *httpContext) OnHttpRequestBody(bodySize int, endOfStream bool) types.Action {
-	chunk, err := proxywasm.GetHttpRequestBody(0, bodySize)
-	if err != nil {
+	if err := proxywasm.AppendHttpRequestBody([]byte("foo")); err != nil {
 		sendErrorResponse(err)
-		return types.ActionContinue
-	}
-	err = proxywasm.ReplaceHttpRequestBody(append(chunk, "foo"...))
-	if err != nil {
-		sendErrorResponse(err)
-		return types.ActionContinue
 	}
 	return types.ActionContinue
 }
 
 // Add bar onto the end of each response body chunk
 func (ctx *httpContext) OnHttpResponseBody(bodySize int, endOfStream bool) types.Action {
-	chunk, err := proxywasm.GetHttpResponseBody(0, bodySize)
-	if err != nil {
+	if err := proxywasm.AppendHttpResponseBody([]byte("bar")); err != nil {
 		sendErrorResponse(err)
-		return types.ActionContinue
-	}
-	err = proxywasm.ReplaceHttpResponseBody(append(chunk, "bar"...))
-	if err != nil {
-		sendErrorResponse(err)
-		return types.ActionContinue
 	}
 	return types.ActionContinue
 }

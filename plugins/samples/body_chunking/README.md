@@ -6,12 +6,12 @@ This plugin demonstrates how to process HTTP request and response bodies in chun
 
 1. **Request body processing**: When the proxy receives a chunk of the request body from the client, it invokes the plugin's `on_http_request_body` callback.
    - The plugin reads the current chunk length.
-   - The plugin appends `"foo"` to the end of the chunk using `setBuffer` (C++) or `set_http_request_body` (Rust).
+   - The plugin appends `"foo"` to the end of the chunk using `setBuffer` (C++), `set_http_request_body` (Rust), or `AppendHttpRequestBody` (Go).
    - The plugin returns `FilterDataStatus::Continue`, allowing the modified chunk to be forwarded to the upstream server.
 
 2. **Response body processing**: When the proxy receives a chunk of the response body from the upstream server, it invokes the plugin's `on_http_response_body` callback.
    - The plugin reads the current chunk length.
-   - The plugin appends `"bar"` to the end of the chunk using `setBuffer` (C++) or `set_http_response_body` (Rust).
+   - The plugin appends `"bar"` to the end of the chunk using `setBuffer` (C++), `set_http_response_body` (Rust), or `AppendHttpResponseBody` (Go).
    - The plugin returns `FilterDataStatus::Continue`, allowing the modified chunk to be forwarded to the client.
 
 3. **Chunking behavior**: The test file demonstrates that the plugin works correctly with different chunking strategies:
@@ -43,6 +43,9 @@ Build the plugin for any supported language from the `plugins/` directory:
 ```bash
 # C++
 bazelisk build //samples/body_chunking:plugin_cpp.wasm
+
+# Go
+bazelisk build //samples/body_chunking:plugin_go.wasm
 ```
 
 ## Test
@@ -77,4 +80,4 @@ Derived from [`tests.textpb`](tests.textpb):
 
 - [x] [C++](plugin.cc)
 - [ ] Rust (not available)
-- [ ] Go (not available)
+- [x] [Go](plugin.go)

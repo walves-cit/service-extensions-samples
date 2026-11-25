@@ -41,6 +41,7 @@ proxy_wasm_tests(
     ],
     plugins = [
         ":plugin_cpp.wasm",
+        ":plugin_go.wasm",
     ],
     tests = ":tests.yaml",
 )
